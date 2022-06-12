@@ -1,5 +1,16 @@
 ﻿@page "/"
 
+@code {
+    string InputValue = "";
+    string HashValue = "***Hash will be here***";
+    Microsoft.AspNetCore.Identity.PasswordHasher passwordHasher = new Microsoft.AspNetCore.Identity.PasswordHasher();
+
+    private void calculateHashValue()
+    {
+      HashValue = passwordHasher.HashPassword(InputValue);
+    }
+}
+
 <h4>Calculate ASPNet Identity Password Hash</h4>
 
 <p>
@@ -13,20 +24,7 @@
 
 <button @onclick="calculateHashValue">Calculate Hash</button>
 
-
-
 <p>
   <label>Hash:</label><br>
   <code>@HashValue</code>
 </p>
-
-@code {
-    string InputValue = "";
-    string HashValue = "***Hash will be here***";
-    Microsoft.AspNetCore.Identity.PasswordHasher passwordHasher = new Microsoft.AspNetCore.Identity.PasswordHasher();
-
-    private void calculateHashValue()
-    {
-      HashValue = passwordHasher.HashPassword(InputValue);
-    }
-}
