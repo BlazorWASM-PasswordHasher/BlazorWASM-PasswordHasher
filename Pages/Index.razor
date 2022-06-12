@@ -1,7 +1,32 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h4>Calculate ASPNet Identity Password Hash</h4>
 
-Welcome to your new app.
+<p>
+  <mark>note: may take a moment depending on the speed of your computer.</mark>
+</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p>
+  <label>Enter Password:</label><br>
+  <input type="text" @bind="InputValue" />
+</p>
+
+<button @onclick="calculateHashValue">Calculate Hash</button>
+
+
+
+<p>
+  <label>Hash:</label><br>
+  <code>@HashValue</code>
+</p>
+
+@code {
+    string InputValue = "";
+    string HashValue = "***Hash will be here***";
+    Microsoft.AspNetCore.Identity.PasswordHasher passwordHasher = new Microsoft.AspNetCore.Identity.PasswordHasher();
+
+    private void calculateHashValue()
+    {
+      HashValue = passwordHasher.HashPassword(InputValue);
+    }
+}
